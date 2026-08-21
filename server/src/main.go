@@ -16,6 +16,7 @@ func main() {
 		log.Fatal("Failed to load environment file")
 	}
 	dbFile := os.Getenv("DB_PATH")
+	port := os.Getenv("PORT")
 
 	fmt.Println("Initializing SQLite database...")
 	database, err := db.InitDB(dbFile)
@@ -39,7 +40,6 @@ func main() {
 	mux := http.NewServeMux()
 	api.RegisterRoutes(mux, database)
 
-	port := ":8080"
 	fmt.Printf("HTTP Server is starting on port %s...\n", port)
 
 	// Apply CORS middleware
